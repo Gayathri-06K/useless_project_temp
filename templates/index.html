@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ml">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>കേശുന്റെ പ്രവചനം 🔮</title>
+
+    <!-- Malayalam Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <main class="home-container">
+
+        <div class="content">
+
+            <div class="crystal-ball">
+                🔮
+            </div>
+
+            <h1>
+                കേശുന്റെ<br>
+                പ്രവചനം
+            </h1>
+
+            <p class="subtitle">
+                നിന്റെ ഭാവി അറിയാൻ വന്നതല്ലേ? 😌
+            </p>
+
+            <p class="description">
+                ഇവിടെ ശാസ്ത്രമില്ല...
+                ലോജിക്കില്ല...
+                <br>
+                വെറും കേശുന്റെ പ്രവചനമാണ്! 😭
+            </p>
+
+            <a href="{{ url_for('prediction') }}" class="next-button">
+                NEXT <span>→</span>
+            </a>
+
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

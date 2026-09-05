@@ -1,0 +1,182 @@
+/* Remove default browser spacing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main page */
+body {
+    font-family: 'Noto Sans Malayalam', sans-serif;
+    min-height: 100vh;
+}
+
+/* Full-screen background */
+.home-container {
+    min-height: 100vh;
+
+    background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.65)
+        ),
+        url("../images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* Everything in the middle */
+.content {
+    color: white;
+    padding: 30px;
+    max-width: 750px;
+
+    animation: appear 1.5s ease;
+}
+
+/* Crystal ball */
+.crystal-ball {
+    font-size: 75px;
+    margin-bottom: 15px;
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+/* Main Malayalam title */
+h1 {
+    font-size: 70px;
+    font-weight: 800;
+
+    line-height: 1.1;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+/* Main sentence */
+.subtitle {
+    font-size: 26px;
+    font-weight: 600;
+
+    margin-bottom: 15px;
+}
+
+/* Description */
+.description {
+    font-size: 19px;
+    line-height: 2;
+
+    margin-bottom: 35px;
+}
+
+/* NEXT button */
+.next-button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px 38px;
+
+    background: white;
+    color: black;
+
+    border-radius: 50px;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Button hover */
+.next-button:hover {
+    transform: scale(1.08);
+
+    background: black;
+    color: white;
+
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+}
+
+/* Arrow animation */
+.next-button span {
+    font-size: 25px;
+
+    transition: transform 0.3s ease;
+}
+
+.next-button:hover span {
+    transform: translateX(6px);
+}
+
+/* Page entrance animation */
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Crystal ball floating animation */
+@keyframes floating {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+/* Mobile screen */
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 45px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .crystal-ball {
+        font-size: 55px;
+    }
+
+}
