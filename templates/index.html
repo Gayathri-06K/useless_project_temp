@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Gayathri:wght@400;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;600;700;900&family=Yatra+One&display=swap" rel="stylesheet">
     
     <!-- External stylesheet -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
@@ -114,8 +114,30 @@
                         <span class="input-hint">💡 യഥാർത്ഥ പേരോ, അല്ലെങ്കിൽ നിങ്ങളുടെ വിളിപ്പേരോ നൽകാം!</span>
                     </div>
 
-                    <!-- Optional Fun Astrology Parameter: Snack -->
+                    <!-- Optional Fun Astrology Parameter: Nakshatram / Rashi -->
                     <div class="form-row">
+                        <div class="form-group half">
+                            <label for="nakshatram" class="field-label">
+                                <span class="label-icon">🌟</span> നക്ഷത്രം (Nakshatram):
+                            </label>
+                            <select id="nakshatram" class="styled-select">
+                                <option value="">-- നക്ഷത്രം അറിയില്ല (Mystery) --</option>
+                                {% if rashis %}
+                                    {% for rashi in rashis %}
+                                        <option value="{{ rashi.id }}">{{ rashi.name }}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option value="ashwathi">അശ്വതി ⭐</option>
+                                    <option value="bharani">ഭരണി ⭐</option>
+                                    <option value="karthika">കാർത്തിക ⭐</option>
+                                    <option value="rohini">രോഹിണി ⭐</option>
+                                    <option value="makayiram">മകയിരം ⭐</option>
+                                    <option value="thiruvonam">തിരുവോണം ⭐</option>
+                                {% endif %}
+                            </select>
+                        </div>
+
+                        <!-- Optional Fun Astrology Parameter: Snack -->
                         <div class="form-group half">
                             <label for="favSnack" class="field-label">
                                 <span class="label-icon">☕</span> ഇഷ്ടപ്പെട്ട ചായക്കടി:
@@ -126,20 +148,6 @@
                                 <option value="കട്ടൻ ചായ">☕ കട്ടൻ ചായ (Philosophy)</option>
                                 <option value="ബിരിയാണി">🍗 ചിക്കൻ ബിരിയാണി (Royal)</option>
                                 <option value="പരിപ്പുവട">🍘 പരിപ്പുവട (Revolutionary)</option>
-                            </select>
-                        </div>
-
-                        <!-- Optional Fun Astrology Parameter: Mood -->
-                        <div class="form-group half">
-                            <label for="currentMood" class="field-label">
-                                <span class="label-icon">🎭</span> നിലവിലെ അവസ്ഥ:
-                            </label>
-                            <select id="currentMood" class="styled-select">
-                                <option value="സിംഗിൾ">💔 കട്ട സിംഗിൾ & ദുഃഖം</option>
-                                <option value="അരിയേഴ്സ്">📚 എക്സാം പേടി / അരിയേഴ്സ്</option>
-                                <option value="ബോറടി">🥱 കട്ട ബോറടി & ഉറക്കം</option>
-                                <option value="ദാരിദ്ര്യം">💸 കയ്യിൽ കാശില്ലാത്ത അവസ്ഥ</option>
-                                <option value="ഓവർതിങ്കിങ്">🤯 രാത്രിയിലെ ഓവർതിങ്കിങ്</option>
                             </select>
                         </div>
                     </div>

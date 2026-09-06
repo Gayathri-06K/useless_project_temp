@@ -5,12 +5,49 @@ A satirical, hilarious Malayalam astrology prediction generator
 for the College Useless Project Competition.
 """
 
-from flask import Flask, render_template, request, jsonify
 import random
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
-# Hilarious Malayalam astrology predictions database
+# =========================================================
+# 27 MALAYALAM NAKSHATRANGAL ⭐
+# =========================================================
+
+RASHIS = [
+    {"id": "ashwathi", "name": "അശ്വതി ⭐", "desc": "പെട്ടെന്ന് ചെയ്യും. തെറ്റും പെട്ടെന്ന്. 😂"},
+    {"id": "bharani", "name": "ഭരണി ⭐", "desc": "Attitude full. Work zero. 💀"},
+    {"id": "karthika", "name": "കാർത്തിക ⭐", "desc": "ചൂട് പെട്ടെന്ന്. 😂"},
+    {"id": "rohini", "name": "രോഹിണി ⭐", "desc": "Style ആദ്യം. 😎"},
+    {"id": "makayiram", "name": "മകയിരം ⭐", "desc": "എല്ലാം അറിയണം. 😂"},
+    {"id": "thiruvathira", "name": "തിരുവാതിര ⭐", "desc": "Drama വേണം. 💀"},
+    {"id": "punartham", "name": "പുണർതം ⭐", "desc": "Same mistake വീണ്ടും. 😂"},
+    {"id": "pooyam", "name": "പൂയം ⭐", "desc": "Gossip വേണം. 😂"},
+    {"id": "ayilyam", "name": "ആയില്യം ⭐", "desc": "Mind game pro. 💀"},
+    {"id": "makam", "name": "മകം ⭐", "desc": "Boss attitude. Salary ഇല്ല. 😂"},
+    {"id": "pooram", "name": "പൂരം ⭐", "desc": "Party ready. Assignment pending. 💀"},
+    {"id": "uthram", "name": "ഉത്രം ⭐", "desc": "Plan ചെയ്യും. ചെയ്യില്ല. 😂"},
+    {"id": "atham", "name": "അത്തം ⭐", "desc": "Overthinking pro. 💀"},
+    {"id": "chithira", "name": "ചിത്തിര ⭐", "desc": "Look important. 😂"},
+    {"id": "chothi", "name": "ചോതി ⭐", "desc": "Attention വേണം. 😎"},
+    {"id": "vishakham", "name": "വിശാഖം ⭐", "desc": "Goal ഉണ്ട്. വഴി ഇല്ല. 😂"},
+    {"id": "anizham", "name": "അനിഴം ⭐", "desc": "Advice unlimited. 💀"},
+    {"id": "thrikketta", "name": "തൃക്കേട്ട ⭐", "desc": "എനിക്ക് എല്ലാം അറിയാം. 😂"},
+    {"id": "moolam", "name": "മൂലം ⭐", "desc": "പ്രശ്നം വന്നാൽ ആദ്യം. 💀"},
+    {"id": "pooradam", "name": "പൂരാടം ⭐", "desc": "Talk nonstop. 😂"},
+    {"id": "uthradam", "name": "ഉത്രാടം ⭐", "desc": "പഠിക്കണം... ഒരിക്കൽ. 💀"},
+    {"id": "thiruvonam", "name": "തിരുവോണം ⭐", "desc": "Food first. 🍗"},
+    {"id": "avittam", "name": "അവിട്ടം ⭐", "desc": "Vibe മാത്രം. 🎶"},
+    {"id": "chathayam", "name": "ചതയം ⭐", "desc": "Silent observer. 👀"},
+    {"id": "pooruruttathi", "name": "പൂരുരുട്ടാതി ⭐", "desc": "Think. Think. Think. 💀"},
+    {"id": "uthrattathi", "name": "ഉത്രട്ടാതി ⭐", "desc": "5 min rest = 5 hour sleep. 😴"},
+    {"id": "revathi", "name": "രേവതി ⭐", "desc": "കാശ് വരും. പോകും. 💸"}
+]
+
+# =========================================================
+# HILARIOUS MALAYALAM PREDICTION DATABASE
+# =========================================================
+
 PREDICTIONS_POOL = [
     {
         "text": "നിങ്ങളുടെ ഗ്രഹനില പരിശോധിച്ചതിൽ അടുത്ത 24 മണിക്കൂറിനുള്ളിൽ ഫോൺ ചാർജ് 1% ആകും, എന്നാൽ ചാർജർ കുത്താൻ നിങ്ങൾക്ക് അതിയായ മടി തോന്നും!",
@@ -124,47 +161,165 @@ BEST_CAREERS = [
     "കട്ട ബോറടി അംബാസഡർ"
 ]
 
-MOVIE_CHARACTERS = [
-    {"name": "ദശമൂലം ദാമു", "dialogue": "കോൺഫിഡൻസ് അൺലിമിറ്റഡ്, പക്ഷേ പ്ലാനിംഗ് തീരെ ഇല്ല! 😂"},
-    {"name": "മണവാളൻ", "dialogue": "സ്റ്റൈൽ ഫുൾ ആണ്, പക്ഷേ ബാങ്ക് അക്കൗണ്ടിൽ മിനിമം ബാലൻസ് ഇല്ല! 😎"},
-    {"name": "സിഐഡി ഉണ്ണികൃഷ്ണൻ", "dialogue": "നാട്ടിലെ എല്ലാ കാര്യങ്ങളും അന്വേഷിക്കും, സ്വന്തം ലൈഫ് ഒഴികെ! 🕵️"},
-    {"name": "രമണൻ", "dialogue": "കഷ്ടപ്പാടും കണ്ണീരും മാത്രം ബാക്കി... മുതലാളി ശമ്പളം തരില്ല! 💔"},
-    {"name": "ദാസനും വിജയനും കോംബോ", "dialogue": "ഐഡിയകൾ 100 എണ്ണം ഉണ്ട്, പക്ഷേ എക്സിക്യൂഷൻ പൂജ്യമാണ്! 🤝"},
-    {"name": "സലിം കുമാർ (മായാവി വിക്രം)", "dialogue": "സീരിയസ് സിറ്റുവേഷൻ പോലും കോമഡിയാക്കി മാറ്റുന്ന കഴിവ്! 🎭"},
-    {"name": "ജഗതി (അപ്പുക്കുട്ടൻ)", "dialogue": "കാര്യം എന്താണെന്ന് അറിയില്ലെങ്കിലും മുന്നിൽ തന്നെ ഉണ്ടാകും! 🏃"},
-    {"name": "ആട് തോമ", "dialogue": "എൻട്രി മാസ്സ്, പക്ഷേ വീട്ടിൽ കയറുമ്പോൾ അമ്മയുടെ അടി ഉറപ്പാണ്! 🔥"}
+CHARACTER = [
+    "നല്ല ആളാണ്... mood അനുസരിച്ച്. 😂",
+    "Confidence ഉണ്ട്. Reason ഇല്ല. 💀",
+    "ചിന്തിക്കാൻ ഇഷ്ടം. Overthink ചെയ്യാൻ അതിലും ഇഷ്ടം. 😂",
+    "പണി തുടങ്ങും. Finish ചെയ്യാൻ മടി. 💀",
+    "പുറത്ത് calm. ഉള്ളിൽ full drama. 😂",
+    "Advice കൊടുക്കും. സ്വന്തം കാര്യം മറക്കും. 💀",
+    "ഉറക്കം നിങ്ങളെക്കാൾ important ആണ്. 😴",
+    "ചെറിയ കാര്യം. വലിയ tension. 😂",
+    "നിങ്ങൾക്ക് എല്ലാം അറിയാം... Google സമ്മതിക്കില്ല. 💀",
+    "Motivation വരും. 5 മിനിറ്റിൽ പോകും. 😂",
+    "Busy ആണെന്ന് പറയും. Actually reels കാണുകയാണ്. 💀",
+    "Plan A മുതൽ Plan Z വരെ ഉണ്ട്. ഒന്നും നടക്കില്ല. 😂"
 ]
 
-KESAVAN_QUOTES = [
+JOB = [
+    "ജോലി കിട്ടും. ആദ്യം എഴുന്നേൽക്കാൻ പഠിക്കണം. 😂",
+    "Career നല്ലതാണ്. Monday മോശമാണ്. 💀",
+    "Promotion വരും... ഒരിക്കൽ. 😂",
+    "Boss ആകും. ആദ്യം work ചെയ്യണം. 💀",
+    "Interview-ൽ confidence കാണിക്കും. Answer പിന്നെ നോക്കാം. 😂",
+    "ജോലി കിട്ടും. Salary കണ്ടാൽ സന്തോഷിക്കും. 💸",
+    "Future-ൽ വലിയ position. ഇപ്പോൾ attendance നോക്ക്. 😂",
+    "Work ചെയ്യാൻ കഴിയും. Mood വേണം. 💀",
+    "Career bright ആണ്. Sleep schedule dark ആണ്. 😂",
+    "ജോലി വരും. 'നാളെ തുടങ്ങാം' നിർത്തിയാൽ മതി. 💀",
+    "Office-ൽ work ചെയ്യും. Lunch break-ൽ കൂടുതൽ enthusiasm. 😂",
+    "Career വളരും. ആദ്യം phone താഴെ വെക്കൂ. 💀"
+]
+
+MONEY = [
+    "പണം വരും. ഉടനെ പോകും. 💸",
+    "Wallet-ന് നിങ്ങളോട് പരാതിയുണ്ട്. 😂",
+    "Salary വരും. Screenshot എടുക്കും. പിന്നെ തീരും. 💀",
+    "Save ചെയ്യണം എന്ന് വിചാരിക്കും. Shopping തുറക്കും. 😂",
+    "Money luck ഉണ്ട്. Saving luck ഇല്ല. 💸",
+    "Cash കുറവ്. Plans കൂടുതൽ. 💀",
+    "പണം കിട്ടും. എവിടെ പോയെന്ന് അറിയില്ല. 😂",
+    "Wallet ഇപ്പോൾ diet-ലാണ്. 💀",
+    "Future rich ആണ്. Present broke ആണ്. 😂",
+    "Bank balance നോക്കരുത്. സന്തോഷം പോകും. 💀",
+    "Discount കണ്ടാൽ budget മറക്കും. 😂",
+    "പണം വരും. Amazon ആദ്യം അറിയും. 💸"
+]
+
+LOVE = [
+    "Crush ഉണ്ടാകും. പറയാൻ ധൈര്യം ഉണ്ടാകില്ല. 😂",
+    "Love വരും. Reply കിട്ടുമോ എന്നത് സംശയം. 💀",
+    "ഒരു ആളെ ഇഷ്ടപ്പെടും. അയാൾക്ക് അറിയില്ല. 😂",
+    "Love life-ൽ twist ഉണ്ട്. Netflix പോലും jealous. 💀",
+    "Reply കാത്തിരിക്കും. Seen നോക്കി ഇരിക്കും. 😂",
+    "Love luck ഉണ്ട്. Timing ഇല്ല. 💀",
+    "Crush നിങ്ങളെ നോക്കും. എന്തിനെന്ന് അറിയില്ല. 😂",
+    "Love story തുടങ്ങും... typing മുതൽ. 💀",
+    "നിങ്ങൾ sincere ആണ്. Overthinking ആണ് villain. 😂",
+    "പ്രണയം വരും. Assignment പോലെ deadline ഇല്ല. 💀",
+    "Reply 'ok' ആയിരിക്കും. നിങ്ങൾ അതിന്റെ meaning അന്വേഷിക്കും. 😂",
+    "Love life complicated ആണ്. നിങ്ങൾ തന്നെ simplify ചെയ്യണം. 💀"
+]
+
+MARRIAGE = [
+    "വിവാഹം നടക്കും. Date കേശവേട്ടന് അറിയില്ല. 😂",
+    "Partner കിട്ടും. ആദ്യം നിങ്ങളെ സഹിക്കണം. 💀",
+    "വിവാഹം നല്ലതാകും. Remote ആരുടെ കൈയിൽ എന്നത് കണ്ടറിയാം. 😂",
+    "വീട്ടുകാർക്ക് ഒരു ദിവസം സന്തോഷം വരും. 💀",
+    "Marriage luck ഉണ്ട്. തീരുമാനം slow ആണ്. 😂",
+    "Partner നല്ല ആളായിരിക്കും. നിങ്ങളെക്കുറിച്ച് ഉറപ്പില്ല. 💀",
+    "വിവാഹം നടക്കും. Phone കുറച്ച് താഴെ വെക്കണം. 😂",
+    "Love → Marriage ആകാം. Parents → Drama ആകാം. 💀",
+    "വിവാഹശേഷം സമാധാനം കിട്ടും... ചിലപ്പോൾ. 😂",
+    "കല്യാണം നടക്കും. ആദ്യം budget നോക്കണം. 💸",
+    "Partner നിങ്ങളെ മനസ്സിലാക്കും. നിങ്ങൾ കേൾക്കുമോ എന്നതാണ് പ്രശ്നം. 😂",
+    "കല്യാണം ഉറപ്പ്. Date മാത്രം suspense. 💀"
+]
+
+FUTURE = [
+    "Future bright ആണ്. Curtain തുറക്കൂ. 😂",
+    "വലിയ മാറ്റം വരും. Haircut ആകാം. 💀",
+    "നല്ല ദിവസം വരും. അലാറം കേട്ട് എഴുന്നേൽക്കണം. 😂",
+    "Success വരും. Shortcut ഇല്ല. 💀",
+    "Future നല്ലതാണ്. Present ഒന്ന് ശരിയാക്കൂ. 😂",
+    "ഒരു അവസരം വരും. 'നാളെ നോക്കാം' പറയരുത്. 💀",
+    "യാത്രകൾ ഉണ്ടാകും. Wallet കരയും. 💸",
+    "നല്ല സമയം വരും. Assignment ആദ്യം തീർക്കൂ. 😂",
+    "ജീവിതത്തിൽ വലിയ twist ഉണ്ട്. 💀",
+    "Future കിടിലം. Laziness ആണ് പ്രശ്നം. 😂",
+    "നിങ്ങളുടെ future-ൽ success ഉണ്ട്. Alarm കേൾക്കാത്തത് മാത്രം പ്രശ്നം. 💀",
+    "ഒരു ദിവസം നിങ്ങൾ famous ആകും. കാരണം എന്താണെന്ന് അറിയില്ല. 😂"
+]
+
+WARNING = [
+    "രാത്രി 2 മണിക്ക് decisions എടുക്കരുത്. 😂",
+    "ഒരു reel കൂടി = രാവിലെ. 💀",
+    "Friend-ന് പണം കൊടുക്കുമ്പോൾ goodbye പറയുക. 😂",
+    "Exam-ന്റെ തലേദിവസം പഠിക്കരുത്... വളരെ late ആണ്. 💀",
+    "Online shopping ശ്രദ്ധിക്കുക. Wallet കരയും. 😂",
+    "Alarm വെച്ചിട്ട് phone കൈയിൽ പിടിക്കരുത്. 😴",
+    "Overthinking കുറയ്ക്കുക. 'OK' എല്ലായ്പ്പോഴും breakup അല്ല. 😂",
+    "നാളെ മുതൽ എന്നത് cancel ചെയ്യുക. 💀",
+    "Food order ചെയ്യുന്നതിന് മുമ്പ് balance നോക്കൂ. 🍗",
+    "Attendance കുറവാണെങ്കിൽ ഗ്രഹങ്ങളെ കുറ്റം പറയരുത്. 😂",
+    "Password friends-ന് കൊടുക്കരുത്. 💀",
+    "Phone ഒന്ന് താഴെ വെക്കൂ. അതും ജീവിക്കും. 😂",
+    "Exam hall-ൽ astrology work ചെയ്യില്ല. പഠിക്കണം. 💀",
+    "ഒരു episode കൂടി എന്ന് പറഞ്ഞാൽ season തീരും. 😂"
+]
+
+KESHOO_QUOTES = [
     "“ജാതകം നോക്കി പേടിക്കേണ്ട, ജീവിച്ചു പേടിച്ചാൽ മതി!” — കേശു സ്വാമി",
+    "“പ്രശ്നം ഗ്രഹങ്ങളിൽ അല്ല... നിന്നിലാണ്! 😂” — കേശു",
+    "“കേശവേട്ടൻ നോക്കി. കേശവേട്ടൻ പോയി. 💀” — കേശു സ്വാമി",
+    "“കവടി പോലും നിന്നെ കണ്ടിട്ട് ചിരിച്ചു. 😂” — കേശു",
     "“എന്റെ പ്രവചനം തെറ്റിയാൽ നിങ്ങളുടെ ഗ്രഹങ്ങൾക്ക് എന്തോ കുഴപ്പമുണ്ട്!” — കേശു",
     "“കവടി ഒരിക്കലും കള്ളം പറയില്ല, കാരണം കവടിക്ക് സംസാരിക്കാൻ അറിയില്ലല്ലോ!” — കേശു സ്വാമി",
     "“ശനി ദോഷമല്ല പ്രശ്നം, രാവിലെ എഴുന്നേൽക്കാൻ തോന്നാത്ത മടിയാണ് മെയിൻ പ്രശ്നം!” — കേശു",
-    "“നാസയ്ക്ക് വരെ മനസ്സിലാകാത്ത ടെക്നോളജിയാണ് ഞാൻ ഈ കമ്പ്യൂട്ടറിൽ വെച്ചു ചെയ്യുന്നത്!” — കേശു"
+    "“നിന്റെ ജാതകം വായിക്കാൻ calculator പോലും resign ചെയ്തു. 💀” — കേശു സ്വാമി"
+]
+
+MOVIE_CHARACTERS = [
+    {"character": "ദശമൂലം ദാമു", "movie": "ചട്ടമ്പിനാട്", "prediction": "കോൺഫിഡൻസ് അൺലിമിറ്റഡ്, പ്ലാനിംഗ് സീറോ! 😂"},
+    {"character": "മണവാളൻ", "movie": "പുലിവാൽ കല്യാണം", "prediction": "സ്റ്റൈൽ ഫുൾ ആണ്, പക്ഷേ ബാങ്ക് അക്കൗണ്ടിൽ മിനിമം ബാലൻസ് ഇല്ല! 😎"},
+    {"character": "ദാസൻ", "movie": "നാടോടിക്കാറ്റ്", "prediction": "പ്ലാൻ ഒരുപാട്. നടക്കുന്നത് ഒന്നും ഇല്ല. 😂"},
+    {"character": "വിജയൻ", "movie": "നാടോടിക്കാറ്റ്", "prediction": "പ്രശ്നം വന്നാൽ ആദ്യം പേടിക്കും. പിന്നെ solution അന്വേഷിക്കും. 💀"},
+    {"character": "രമണൻ", "movie": "പഞ്ചാബി ഹൗസ്", "prediction": "കഷ്ടപ്പാടും കണ്ണീരും മാത്രം ബാക്കി... മുതലാളി ശമ്പളം തരില്ല! 💔"},
+    {"character": "മൂസ", "movie": "CID Moosa", "prediction": "Plan ഒന്നുമില്ല. Confidence മാത്രം unlimited. 😂"},
+    {"character": "സിഐഡി ഉണ്ണികൃഷ്ണൻ", "movie": "സിഐഡി ഉണ്ണികൃഷ്ണൻ", "prediction": "നാട്ടിലെ എല്ലാ കാര്യങ്ങളും അന്വേഷിക്കും, സ്വന്തം ലൈഫ് ഒഴികെ! 🕵️"},
+    {"character": "അപ്പുക്കുട്ടൻ", "movie": "ഇൻ ഹരിഹർ നഗർ", "prediction": "ചെറിയ പ്രശ്നം പോലും വലിയ disaster ആക്കും. 😂"},
+    {"character": "രാജമാണിക്യം", "movie": "രാജമാണിക്യം", "prediction": "Style ഉണ്ട്. Dialogue അതിലും കൂടുതൽ. 😎"},
+    {"character": "നിശ്ചൽ", "movie": "കിലുക്കം", "prediction": "Situation എന്തായാലും comedy ഉണ്ടാക്കും. 😂"}
 ]
 
 
-@app.route("/")
-def home():
-    """Render the main homepage for Keshunte Pravajanam."""
-    return render_template("index.html")
+def get_greeting(name):
+    greetings = [
+        f"എടാ {name}, കൈ ഒന്ന് കാണിക്കൂ... 🔮",
+        f"{name}, കേശവേട്ടൻ നിന്റെ future നോക്കി! 😂",
+        f"ദേ {name}, ഇനി സത്യം കേൾക്കണം! 💀",
+        f"{name}, നിന്റെ നക്ഷത്രം കണ്ടപ്പോൾ കേശവേട്ടൻ ഞെട്ടി! 😂",
+        f"അല്ലയോ {name}, എന്തൊക്കെയാ ഈ കൈരേഖ! 💀",
+        f"{name}, ഇനി പറയുന്നത് കേട്ട് കരയരുത്! 😂",
+        f"എടാ {name}, നിന്റെ future തുറന്നുനോക്കാം! 🔮",
+        f"{name}, കേശവേട്ടന് എല്ലാം മനസ്സിലായി! 💀"
+    ]
+    return random.choice(greetings)
 
 
-@app.route("/api/predict", methods=["GET", "POST"])
-def get_prediction():
-    """
-    Generate a hilarious random Malayalam astrology prediction.
-    Accepts user's name and optional attributes.
-    """
-    if request.method == "POST":
-        data = request.get_json(silent=True) or request.form.to_dict()
-        user_name = data.get("name", "").strip() if data else ""
-    else:
-        user_name = request.args.get("name", "").strip()
+def get_rashi(rashi_id):
+    if not rashi_id:
+        return None
+    for rashi in RASHIS:
+        if rashi["id"] == rashi_id or rashi["name"].startswith(rashi_id):
+            return rashi
+    return None
 
-    if not user_name:
-        user_name = "അജ്ഞാത വിദ്വാൻ"  # Anonymous genius default
 
+def generate_prediction(name="സുഹൃത്തേ", rashi_id=None):
+    name = str(name).strip() if name else "സുഹൃത്തേ"
+    selected_rashi = get_rashi(rashi_id)
+    movie_char = random.choice(MOVIE_CHARACTERS)
     prediction_item = random.choice(PREDICTIONS_POOL)
     dosham_item = random.choice(DOSHAMS)
     remedy = random.choice(REMEDIES)
@@ -172,16 +327,21 @@ def get_prediction():
     lucky_color = random.choice(LUCKY_COLORS)
     lucky_food = random.choice(LUCKY_FOODS)
     career = random.choice(BEST_CAREERS)
-    character = random.choice(MOVIE_CHARACTERS)
-    quote = random.choice(KESAVAN_QUOTES)
+    quote = random.choice(KESHOO_QUOTES)
 
-    response_payload = {
+    luck_score = random.randint(1, 100)
+    danger_score = random.randint(1, 100)
+
+    return {
         "success": True,
-        "name": user_name,
-        "title": f"ശ്രീ/ശ്രീമതി {user_name} അവരുടെ മഹാജാതകം 📜",
+        "name": name,
+        "greeting": get_greeting(name),
+        "title": f"ശ്രീ/ശ്രീമതി {name} അവരുടെ മഹാജാതകം 📜",
+        "rashi": selected_rashi["name"] if selected_rashi else "നക്ഷത്രം അറിയില്ല ⭐",
+        "rashi_desc": selected_rashi["desc"] if selected_rashi else "കേശവേട്ടന് പോലും അറിയില്ല! 😂",
         "prediction": prediction_item["text"],
         "tagline": prediction_item["tagline"],
-        "accuracy": prediction_item["accuracy"],
+        "accuracy": f"{luck_score}%",
         "dosham": dosham_item["name"],
         "dosham_desc": dosham_item["desc"],
         "remedy": remedy,
@@ -189,12 +349,93 @@ def get_prediction():
         "lucky_color": lucky_color,
         "lucky_food": lucky_food,
         "best_career": career,
-        "movie_character": character["name"],
-        "movie_dialogue": character["dialogue"],
-        "keshu_quote": quote
+        "movie_character": movie_char["character"],
+        "movie_movie": movie_char.get("movie", "മലയാള സിനിമ"),
+        "movie_dialogue": movie_char["prediction"],
+        "keshu_quote": quote,
+        "character": random.choice(CHARACTER),
+        "job": random.choice(JOB),
+        "money": random.choice(MONEY),
+        "love": random.choice(LOVE),
+        "marriage": random.choice(MARRIAGE),
+        "future": random.choice(FUTURE),
+        "warning": random.choice(WARNING),
+        "luck_score": luck_score,
+        "danger_score": danger_score
     }
 
-    return jsonify(response_payload)
+
+# =========================================================
+# ROUTES
+# =========================================================
+
+@app.route("/")
+def home():
+    """Render the main homepage for Keshunte Pravajanam."""
+    return render_template("index.html", rashis=RASHIS)
+
+
+@app.route("/prediction", methods=["GET", "POST"])
+def prediction():
+    """Support alternative /prediction endpoint."""
+    if request.method == "POST":
+        data = request.form
+        name = data.get("name", "സുഹൃത്തേ")
+        rashi_id = data.get("rashi")
+    else:
+        name = request.args.get("name", "സുഹൃത്തേ")
+        rashi_id = request.args.get("rashi")
+
+    result = generate_prediction(name=name, rashi_id=rashi_id)
+    return render_template("index.html", rashis=RASHIS, initial_result=result)
+
+
+@app.route("/api/predict", methods=["GET", "POST"])
+def api_predict():
+    """API endpoint for prediction generation."""
+    if request.method == "POST":
+        data = request.get_json(silent=True) or request.form.to_dict() or {}
+        name = data.get("name", "").strip() or "സുഹൃത്തേ"
+        rashi_id = data.get("rashi") or data.get("nakshatram")
+    else:
+        name = request.args.get("name", "").strip() or "സുഹൃത്തേ"
+        rashi_id = request.args.get("rashi") or request.args.get("nakshatram")
+
+    result = generate_prediction(name=name, rashi_id=rashi_id)
+    return jsonify(result)
+
+
+@app.route("/api/porutham", methods=["GET", "POST"])
+def porutham():
+    """Fun Malayalam astrology compatibility matcher."""
+    if request.method == "POST":
+        data = request.get_json(silent=True) or request.form.to_dict() or {}
+        name1 = data.get("name1", "ഒരാൾ")
+        name2 = data.get("name2", "മറ്റൊരാൾ")
+    else:
+        name1 = request.args.get("name1", "ഒരാൾ")
+        name2 = request.args.get("name2", "മറ്റൊരാൾ")
+
+    compatibility = [
+        {"percentage": "8%", "title": "പൊട്ടക്കിണർ കോംബോ! 😂", "text": f"{name1} + {name2} = ഒരുമിച്ച് project ചെയ്താൽ project തന്നെ കരയും! 💀"},
+        {"percentage": "98%", "title": "റീൽസ് സോൾമേറ്റ്സ്! 📱", "text": f"{name1} reel അയക്കും. {name2} reply ചെയ്യും. പിന്നെ രണ്ടുപേരും 3 മണിക്കൂർ scroll ചെയ്യും! 😂"},
+        {"percentage": "42%", "title": "കടം വാങ്ങുന്ന കൂട്ടുകെട്ട്! 💸", "text": f"{name1} ₹50 ചോദിക്കും. {name2} കൊടുക്കും. തിരിച്ചു കിട്ടില്ല! 💀"},
+        {"percentage": "15%", "title": "സപ്ലി കൂട്ടുകെട്ട്! 📚", "text": f"{name1} പഠിക്കില്ല. {name2} പഠിക്കില്ല. Result രണ്ടുപേരും നോക്കും! 😂"},
+        {"percentage": "100%", "title": "രണ്ടുപേരും ഒരേ ദുരന്തം! 😂", "text": f"{name1}യും {name2}യും കൂടിയാൽ ചുറ്റുമുള്ളവർക്ക് പണി! 💀"},
+        {"percentage": "69%", "title": "കട്ടൻ ചായ കോംബോ! ☕", "text": f"{name1} ചായ വാങ്ങും. {name2} കുടിക്കും. Bill ആരും കൊടുക്കില്ല! 😂"},
+        {"percentage": "1%", "title": "Worst Combo 💀", "text": f"{name1}യും {name2}യും ഒരുമിച്ചാൽ കേശവേട്ടൻ പോലും ഓടും! 😂"},
+        {"percentage": "87%", "title": "Late Legends ⏰", "text": f"{name1} late. {name2} അതിലും late. Class തീരും! 😂"},
+        {"percentage": "73%", "title": "Food Partners 🍗", "text": f"{name1} food കാണും. {name2} order ചെയ്യും. Diet പോയി! 😂"},
+        {"percentage": "99%", "title": "Sleep Partners 😴", "text": f"{name1} ഉറങ്ങും. {name2} ഉറങ്ങും. Plan cancel ചെയ്യും! 😂"}
+    ]
+    result = random.choice(compatibility)
+    return jsonify({
+        "name1": name1,
+        "name2": name2,
+        "percentage": result["percentage"],
+        "title": result["title"],
+        "text": result["text"]
+    })
 
 
 if __name__ == "__main__":
