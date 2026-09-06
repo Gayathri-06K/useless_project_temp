@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>കേശുവിന്റെ പ്രവചനം - Keshunte Pravajanam | 100% Useless Astrology</title>
+    
+    <!-- Meta tags for SEO and sharing -->
+    <meta name="description" content="കേശുവിന്റെ പ്രവചനം (Keshunte Pravajanam) - The hilarious Malayalam astrology prediction generator for college useless project competition. 100% unscientific, 0% guarantee!">
+    <meta property="og:title" content="കേശുവിന്റെ പ്രവചനം 🔮 Keshunte Pravajanam">
+    <meta property="og:description" content="കവടി നിരത്തി കമ്പ്യൂട്ടറിൽ നോക്കി പറയുന്ന കേരളത്തിലെ നമ്പർ വൺ അശാസ്ത്രീയ ജാതകം!">
+    
+    <!-- Google Fonts: Malayalam Unicode Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Gayathri:wght@400;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;600;700;900&family=Yatra+One&display=swap" rel="stylesheet">
+    
+    <!-- External stylesheet -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Hanging Lemon & 7 Green Chillies Evil-Eye Talisman (നാരങ്ങ-മുളക് താലിമാല) -->
+    <div class="lemon-chilli-banner" title="ദൃഷ്ടിദോഷം തടയാൻ കേശു കെട്ടിയത്">
+        <span class="thread"></span>
+        <div class="charm-item chilli">🌶️</div>
+        <div class="charm-item chilli">🌶️</div>
+        <div class="charm-item chilli">🌶️</div>
+        <div class="charm-item lemon">🍋</div>
+        <div class="charm-item chilli">🌶️</div>
+        <div class="charm-item chilli">🌶️</div>
+        <div class="charm-item chilli">🌶️</div>
+    </div>
+
+    <!-- Background Cosmic Elements -->
+    <div class="cosmic-bg">
+        <div class="zodiac-wheel"></div>
+        <div class="floating-cowrie c1">🐚</div>
+        <div class="floating-cowrie c2">🐚</div>
+        <div class="floating-cowrie c3">🐚</div>
+        <div class="floating-star s1">✨</div>
+        <div class="floating-star s2">⭐</div>
+        <div class="floating-star s3">🌟</div>
+    </div>
+
+    <!-- Main Container -->
+    <main class="main-wrapper">
+        
+        <!-- Header Section -->
+        <header class="astro-header">
+            <div class="competition-badge">
+                🏆 TINKERHUB USELESS PROJECTS SPECIAL 🏆
+            </div>
+
+            <div class="guru-avatar-container">
+                <div class="avatar-glow"></div>
+                <!-- Keshu Swami Cartoon Mascot -->
+                <div class="guru-avatar" id="guruAvatar">
+                    <span class="avatar-icon">🧙‍♂️</span>
+                    <span class="sunglasses">🕶️</span>
+                    <span class="chandanam">🪔</span>
+                </div>
+            </div>
+
+            <h1 class="main-title">
+                <span class="malayalam-font">കേശുവിന്റെ പ്രവചനം</span>
+            </h1>
+            <div class="sub-title">
+                <span>Keshunte Pravajanam</span> • <em>The Divine Useless Oracle</em>
+            </div>
+
+            <div class="tagline-pill">
+                🔮 100% അശാസ്ത്രീയം • 0% ഗ്യാരണ്ടി • 1000% കോമഡി 😂
+            </div>
+
+            <!-- Sound toggle button -->
+            <button id="soundToggleBtn" class="sound-btn" title="ശബ്ദം ഓൺ / ഓഫ് ചെയ്യുക" aria-label="Toggle Sound">
+                <span id="soundIcon">🔊</span> സൗണ്ട്: <span id="soundStatus">ON</span>
+            </button>
+        </header>
+
+        <!-- Astrology Interaction Card -->
+        <section class="card-container" id="interactionCard">
+
+            <!-- Card Top Golden Arch -->
+            <div class="card-arch">
+                <span>⚡ ലൈവ് കവടി നിരത്തൽ ബ്യൂറോ ⚡</span>
+            </div>
+
+            <div class="card-body">
+                
+                <p class="welcome-blurb">
+                    നിങ്ങളുടെ പേര് നൽകി ആ ദിവ്യമായ ബട്ടൺ അമർത്തൂ! കേശു സ്വാമി ഇപ്പോൾ തന്നെ കവടി ഉരുട്ടി നിങ്ങളുടെ ഭാവിയിലെ സകല മണ്ടത്തരങ്ങളും തുറന്നുപറയും!
+                </p>
+
+                <!-- Prediction Form -->
+                <form id="pravajanamForm" onsubmit="return false;">
+                    
+                    <!-- Name Input Field -->
+                    <div class="form-group">
+                        <label for="userName" class="field-label">
+                            <span class="label-icon">👤</span> നിങ്ങളുടെ പേര് നൽകുക:
+                        </label>
+                        <input 
+                            type="text" 
+                            id="userName" 
+                            name="userName" 
+                            class="styled-input" 
+                            placeholder="ഉദാ: ദാസൻ, വിജയൻ, ദാമു, കനകം..." 
+                            autocomplete="off"
+                            maxlength="40"
+                            required
+                        >
+                        <span class="input-hint">💡 യഥാർത്ഥ പേരോ, അല്ലെങ്കിൽ നിങ്ങളുടെ വിളിപ്പേരോ നൽകാം!</span>
+                    </div>
+
+                    <!-- Optional Fun Astrology Parameter: Snack -->
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="favSnack" class="field-label">
+                                <span class="label-icon">☕</span> ഇഷ്ടപ്പെട്ട ചായക്കടി:
+                            </label>
+                            <select id="favSnack" class="styled-select">
+                                <option value="പൊറോട്ട">🌯 പൊറോട്ട & ബീഫ് (Mass)</option>
+                                <option value="പഴംപൊരി">🍌 ചൂട് പഴംപൊരി (Classic)</option>
+                                <option value="കട്ടൻ ചായ">☕ കട്ടൻ ചായ (Philosophy)</option>
+                                <option value="ബിരിയാണി">🍗 ചിക്കൻ ബിരിയാണി (Royal)</option>
+                                <option value="പരിപ്പുവട">🍘 പരിപ്പുവട (Revolutionary)</option>
+                            </select>
+                        </div>
+
+                        <!-- Optional Fun Astrology Parameter: Mood -->
+                        <div class="form-group half">
+                            <label for="currentMood" class="field-label">
+                                <span class="label-icon">🎭</span> നിലവിലെ അവസ്ഥ:
+                            </label>
+                            <select id="currentMood" class="styled-select">
+                                <option value="സിംഗിൾ">💔 കട്ട സിംഗിൾ & ദുഃഖം</option>
+                                <option value="അരിയേഴ്സ്">📚 എക്സാം പേടി / അരിയേഴ്സ്</option>
+                                <option value="ബോറടി">🥱 കട്ട ബോറടി & ഉറക്കം</option>
+                                <option value="ദാരിദ്ര്യം">💸 കയ്യിൽ കാശില്ലാത്ത അവസ്ഥ</option>
+                                <option value="ഓവർതിങ്കിങ്">🤯 രാത്രിയിലെ ഓവർതിങ്കിങ്</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Mandatory Button -->
+                    <div class="button-wrapper">
+                        <button type="button" id="predictBtn" class="predict-button" aria-label="പ്രവചനം പറയൂ">
+                            <span class="btn-sparkle">✨</span>
+                            <span class="btn-text">പ്രവചനം പറയൂ</span>
+                            <span class="btn-icon">🔮</span>
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Cowrie Shuffle / Loading Animation Box -->
+                <div id="loadingBox" class="loading-box hidden">
+                    <div class="crystal-ball-wrapper">
+                        <div class="crystal-ball-glow"></div>
+                        <div class="crystal-ball-sphere">
+                            <span class="crystal-symbol">🔮</span>
+                        </div>
+                    </div>
+                    <h3 id="loadingText" class="loading-status">കവടി നിരത്തുന്നു...</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+                    <p class="loading-subtext">ശനി, രാഹു, കേതു എന്നിവരുമായി കോൺഫറൻസ് കാൾ നടക്കുകയാണ് 📡</p>
+                </div>
+
+                <!-- Prediction Result Section (The Grand Jathakam Slip) -->
+                <div id="resultBox" class="result-box hidden">
+                    
+                    <div class="jathakam-slip">
+                        
+                        <!-- Slip Header -->
+                        <div class="slip-header">
+                            <div class="slip-stamp">APPROVED BY KESHU SWAMI 💮</div>
+                            <div class="om-symbol">🕉️ 卐 🕉️</div>
+                            <h2 id="resultUserTitle" class="slip-title">മഹാജാതക പത്രിക</h2>
+                            <span class="slip-subtitle">കേശുവിന്റെ കമ്പ്യൂട്ടർ കവടി പ്രവചനം</span>
+                        </div>
+
+                        <!-- Main Roast Prediction -->
+                        <div class="prediction-roast-card">
+                            <div class="roast-badge" id="resultTagline">മഹാരാജയോഗം</div>
+                            <p class="main-prediction-text" id="resultPredictionText">
+                                <!-- Dynamic Prediction Text -->
+                            </p>
+                            <div class="accuracy-tag">
+                                📊 ശാസ്ത്രീയ കൃത്യത: <strong id="resultAccuracy">0%</strong>
+                            </div>
+                        </div>
+
+                        <!-- Movie Persona Roast -->
+                        <div class="movie-persona-card">
+                            <div class="persona-header">
+                                <span class="persona-icon">🎬</span>
+                                <div>
+                                    <span class="persona-label">നിങ്ങളുടെ സിനിമാ അവതാരം:</span>
+                                    <h4 class="persona-name" id="resultMovieCharacter">ദശമൂലം ദാമു</h4>
+                                </div>
+                            </div>
+                            <p class="persona-dialogue" id="resultMovieDialogue">
+                                കോൺഫിഡൻസ് അൺലിമിറ്റഡ്, പ്ലാനിംഗ് സീറോ!
+                            </p>
+                        </div>
+
+                        <!-- Dosham & Remedy Grid -->
+                        <div class="two-col-grid">
+                            
+                            <!-- Absurd Dosham -->
+                            <div class="info-block dosham-block">
+                                <div class="block-title">
+                                    <span>⚠️</span> കണ്ടകശനി &amp; ദോഷം
+                                </div>
+                                <h4 id="resultDoshamName" class="dosham-name">റീൽസ് അഡിക്ഷൻ ദോഷം</h4>
+                                <p id="resultDoshamDesc" class="block-desc">ഫോൺ സ്ക്രീനിൽ നോക്കി നോക്കി നേരം വെളുപ്പിക്കുന്ന അവസ്ഥ.</p>
+                            </div>
+
+                            <!-- Absurd Remedy -->
+                            <div class="info-block remedy-block">
+                                <div class="block-title">
+                                    <span>🌿</span> അത്ഭുത പരിഹാരം
+                                </div>
+                                <p id="resultRemedy" class="block-desc">
+                                    ഉടൻ തന്നെ അടുത്തുള്ള ചായക്കടയിൽ പോയി സുഹൃത്തുക്കൾക്ക് പഴംപൊരിയും ചായയും വാങ്ങി നൽകുക.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <!-- Lucky Grid -->
+                        <div class="lucky-grid">
+                            <div class="lucky-item">
+                                <span class="lucky-label">🔢 ഭാഗ്യ നമ്പർ</span>
+                                <span class="lucky-val" id="resultLuckyNumber">420</span>
+                            </div>
+                            <div class="lucky-item">
+                                <span class="lucky-label">🎨 ഭാഗ്യ നിറം</span>
+                                <span class="lucky-val" id="resultLuckyColor">കട്ടൻ ചായ കളർ</span>
+                            </div>
+                            <div class="lucky-item">
+                                <span class="lucky-label">🍲 ഭാഗ്യ ഭക്ഷണം</span>
+                                <span class="lucky-val" id="resultLuckyFood">പൊറോട്ട &amp; ബീഫ്</span>
+                            </div>
+                            <div class="lucky-item">
+                                <span class="lucky-label">💼 അനുയോജ്യമായ ജോലി</span>
+                                <span class="lucky-val" id="resultCareer">കവലയിലെ രാഷ്ട്രീയ നിരീക്ഷകൻ</span>
+                            </div>
+                        </div>
+
+                        <!-- Keshu Swami's Golden Quote -->
+                        <div class="keshu-quote-box">
+                            <p id="resultQuote">“ജാതകം നോക്കി പേടിക്കേണ്ട, ജീവിച്ചു പേടിച്ചാൽ മതി!” — കേശു സ്വാമി</p>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="action-buttons-grid">
+                            <button id="tryAgainBtn" class="action-btn secondary-btn" title="മറ്റൊരു പ്രവചനം കാണുക">
+                                🔄 വീണ്ടും നോക്കൂ
+                            </button>
+                            <button id="speakBtn" class="action-btn speak-btn" title="കേശുവിന്റെ ശബ്ദത്തിൽ കേൾക്കൂ">
+                                🗣️ ശബ്ദത്തിൽ കേൾക്കൂ
+                            </button>
+                            <button id="shareWhatsappBtn" class="action-btn whatsapp-btn" title="കൂട്ടുകാർക്ക് WhatsApp-ൽ അയക്കുക">
+                                💬 WhatsApp-ൽ ഷെയർ
+                            </button>
+                            <button id="printBtn" class="action-btn print-btn" title="ജാതകം പ്രിന്റ് ചെയ്യുക / സേവ് ചെയ്യുക">
+                                🖨️ പ്രിന്റ് / സേവ്
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Card Bottom Strip -->
+            <footer class="card-footer">
+                <div class="caution-note">
+                    ⚠️ <strong>മുന്നറിയിപ്പ്:</strong> ഈ പ്രവചനം വളരെ Useless ആണ്. ആരും കാര്യമായി എടുത്ത് കരയരുത്! 😂
+                </div>
+            </footer>
+
+        </section>
+
+        <!-- College Useless Project Footer & Credits -->
+        <footer class="app-footer">
+            <p class="footer-para">
+                🧙‍♂️ <strong>Keshunte Pravajanam</strong> • Crafted with humor &amp; zero astrology skills.
+            </p>
+            <p class="tinkerhub-badge">
+                Made for <strong>TinkerHub Useless Projects Competition</strong> 🚀
+            </p>
+            <p class="copyright-sub">
+                ജ്യോതിഷ സെർവർ: കേശു സ്വാമി &amp; കട്ടൻ ചായ ബ്രദേഴ്‌സ് © 2026
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Canvas for Confetti Celebration -->
+    <canvas id="confettiCanvas" class="confetti-canvas"></canvas>
+
+    <!-- JavaScript Application Logic -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

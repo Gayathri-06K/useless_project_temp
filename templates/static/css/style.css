@@ -1,0 +1,727 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        "Noto Sans Malayalam",
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #17002f,
+            #3b0066,
+            #001f4d,
+            #12002b
+        );
+
+    color: white;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background-image:
+        radial-gradient(white 1px, transparent 1px);
+
+    background-size: 45px 45px;
+
+    opacity: 0.18;
+
+    pointer-events: none;
+
+    animation: starsMove 20s linear infinite;
+}
+
+@keyframes starsMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(45px);
+    }
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.page-container {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px 15px;
+
+}
+
+
+/* =========================
+   ASTRO CARD
+========================= */
+
+.astro-card,
+.prediction-card {
+
+    width: 100%;
+
+    max-width: 700px;
+
+    position: relative;
+
+    background: rgba(20, 5, 40, 0.94);
+
+    border: 4px solid #ffd900;
+
+    border-radius: 25px;
+
+    padding: 40px 35px;
+
+    box-shadow:
+        0 0 0 5px #ff4fd8,
+        0 20px 60px rgba(0, 0, 0, 0.6);
+
+    text-align: center;
+
+    animation: cardAppear 0.8s ease;
+
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* =========================
+   TV LABEL
+========================= */
+
+.tv-label {
+
+    display: inline-block;
+
+    background: #ff1744;
+
+    color: white;
+
+    padding: 8px 15px;
+
+    border-radius: 6px;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 18px;
+
+    box-shadow: 4px 4px 0 #000;
+
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1 {
+
+    font-size: clamp(2rem, 6vw, 3.5rem);
+
+    color: #ffe600;
+
+    text-shadow:
+        4px 4px 0 #ff1493,
+        7px 7px 0 #000;
+
+    line-height: 1.1;
+
+    margin-bottom: 12px;
+
+}
+
+h2 {
+
+    color: #ff65dd;
+
+    margin-bottom: 15px;
+
+}
+
+.subtitle {
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #fff;
+
+}
+
+
+/* =========================
+   WARNING
+========================= */
+
+.warning-box {
+
+    margin: 25px 0;
+
+    padding: 15px;
+
+    border: 3px dashed #ffdf00;
+
+    background: rgba(255, 0, 100, 0.15);
+
+    color: #ffe900;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.input-group {
+
+    text-align: left;
+
+    margin-bottom: 20px;
+
+}
+
+.input-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ffe600;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+}
+
+.input-group input,
+.input-group select {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border: 3px solid #ff4fd8;
+
+    background: #16052c;
+
+    color: white;
+
+    font-size: 16px;
+
+    outline: none;
+
+    transition: 0.3s;
+
+}
+
+.input-group input:focus,
+.input-group select:focus {
+
+    border-color: #ffe600;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
+
+}
+
+.input-group select option {
+
+    background: #18052d;
+
+    color: white;
+
+}
+
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.next-button {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 17px 25px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff006e,
+            #ff7b00,
+            #ffe600
+        );
+
+    color: #180022;
+
+    font-size: 20px;
+
+    font-weight: 1000;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 0 #8b004f;
+
+    transition: 0.2s;
+
+}
+
+.next-button:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 11px 0 #8b004f;
+
+}
+
+.next-button:active {
+
+    transform: translateY(4px);
+
+    box-shadow:
+        0 3px 0 #8b004f;
+
+}
+
+
+/* =========================
+   STICKERS
+========================= */
+
+.sticker {
+
+    position: absolute;
+
+    font-size: 35px;
+
+    animation: floatSticker 3s ease-in-out infinite;
+
+}
+
+.sticker-1 {
+
+    top: -25px;
+    left: -20px;
+
+    transform: rotate(-15deg);
+
+}
+
+.sticker-2 {
+
+    top: 30px;
+    right: -25px;
+
+    transform: rotate(15deg);
+
+}
+
+.sticker-3 {
+
+    bottom: 20px;
+    left: -25px;
+
+    transform: rotate(-10deg);
+
+}
+
+@keyframes floatSticker {
+
+    0%, 100% {
+        transform: translateY(0) rotate(-10deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(10deg);
+    }
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-text {
+
+    margin-top: 25px;
+
+    font-size: 11px;
+
+    color: #aaa;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+#loadingScreen {
+
+    padding: 50px 10px;
+
+}
+
+.crystal-ball {
+
+    font-size: 80px;
+
+    animation:
+        crystalSpin 2s infinite ease-in-out;
+
+}
+
+@keyframes crystalSpin {
+
+    0%, 100% {
+        transform: scale(1) rotate(-5deg);
+    }
+
+    50% {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+}
+
+.loading-dots span {
+
+    font-size: 40px;
+
+    color: #ffe600;
+
+    animation: dotBlink 1.4s infinite;
+
+}
+
+.loading-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dotBlink {
+
+    0%, 80%, 100% {
+        opacity: 0.2;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+}
+
+.loading-small {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+}
+
+
+/* =========================
+   PREDICTION
+========================= */
+
+.hidden {
+
+    display: none;
+
+}
+
+.prediction-header {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+.prediction-header h1 {
+
+    font-size: clamp(1.7rem, 5vw, 2.8rem);
+
+}
+
+.malayalam-title {
+
+    color: #ff65dd;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+}
+
+
+.result-badge {
+
+    display: inline-block;
+
+    margin: 20px 0;
+
+    padding: 10px 15px;
+
+    background: #ff1744;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    font-size: 13px;
+
+    transform: rotate(-2deg);
+
+}
+
+
+/* =========================
+   CHARACTER
+========================= */
+
+.character-box {
+
+    padding: 20px;
+
+    margin: 15px 0;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff006e,
+            #7b00ff
+        );
+
+    border: 3px solid #ffe600;
+
+    box-shadow: 6px 6px 0 #000;
+
+}
+
+.character-box p {
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+
+}
+
+.character-box h2 {
+
+    color: #ffe600;
+
+    margin: 0;
+
+}
+
+
+/* =========================
+   PREDICTION TEXT
+========================= */
+
+.prediction-text {
+
+    text-align: left;
+
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border-left: 5px solid #ffe600;
+
+    border-radius: 10px;
+
+}
+
+.prediction-text p {
+
+    line-height: 1.9;
+
+    font-size: 15px;
+
+}
+
+
+/* =========================
+   FORTUNE BOX
+========================= */
+
+.fortune-box {
+
+    display: grid;
+
+    gap: 12px;
+
+    margin: 20px 0;
+
+}
+
+.fortune-box div {
+
+    text-align: left;
+
+    padding: 14px;
+
+    background: #250943;
+
+    border-radius: 12px;
+
+    border: 2px solid #ff4fd8;
+
+    line-height: 1.6;
+
+}
+
+.fortune-box strong {
+
+    color: #ffe600;
+
+}
+
+
+/* =========================
+   FINAL VERDICT
+========================= */
+
+.final-warning {
+
+    padding: 18px;
+
+    margin: 20px 0;
+
+    background: #ffe600;
+
+    color: #180022;
+
+    border-radius: 15px;
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .astro-card,
+    .prediction-card {
+
+        padding: 30px 20px;
+
+        border-width: 3px;
+
+    }
+
+    .sticker {
+
+        font-size: 25px;
+
+    }
+
+    .sticker-1 {
+        left: -10px;
+    }
+
+    .sticker-2 {
+        right: -10px;
+    }
+
+    .sticker-3 {
+        left: -10px;
+    }
+
+    .prediction-header {
+
+        gap: 5px;
+
+    }
+
+    .prediction-text p {
+
+        font-size: 14px;
+
+    }
+
+}

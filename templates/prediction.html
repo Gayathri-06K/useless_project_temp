@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Your Cosmic Roast 🔮</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+    <div class="stars"></div>
+
+    <main class="page-container">
+
+        <section class="prediction-card">
+
+            <div class="sticker sticker-1">🔮</div>
+            <div class="sticker sticker-2">💀</div>
+            <div class="sticker sticker-3">😂</div>
+
+            <!-- Loading Screen -->
+
+            <div id="loadingScreen">
+
+                <div class="crystal-ball">
+                    🔮
+                </div>
+
+                <h2>
+                    Keshavan is consulting the stars...
+                </h2>
+
+                <p>
+                    നക്ഷത്രങ്ങളോട് ചോദിച്ചുകൊണ്ടിരിക്കുകയാണ്...
+                </p>
+
+                <div class="loading-dots">
+                    <span>.</span>
+                    <span>.</span>
+                    <span>.</span>
+                </div>
+
+                <p class="loading-small">
+                    Connecting to cosmic servers... 📡
+                </p>
+
+            </div>
+
+
+            <!-- Prediction -->
+
+            <div id="predictionContent" class="hidden">
+
+                <div class="prediction-header">
+
+                    <span>🔮</span>
+
+                    <h1>
+                        Keshavante Pravachanam
+                    </h1>
+
+                    <span>🔮</span>
+
+                </div>
+
+                <p class="malayalam-title">
+                    കേശവന്റെ പ്രവചനം
+                </p>
+
+
+                <div class="result-badge">
+                    🚨 COSMIC REPORT GENERATED 🚨
+                </div>
+
+
+                <h2 id="userGreeting"></h2>
+
+
+                <div class="character-box">
+
+                    <p>
+                        🎬 നിങ്ങളുടെ Movie Character:
+                    </p>
+
+                    <h2 id="movieCharacter"></h2>
+
+                </div>
+
+
+                <div class="prediction-text">
+
+                    <p id="predictionParagraph"></p>
+
+                </div>
+
+
+                <div class="fortune-box">
+
+                    <div>
+                        💼 <strong>Career:</strong>
+                        <span id="careerResult"></span>
+                    </div>
+
+                    <div>
+                        ❤️ <strong>Love:</strong>
+                        <span id="loveResult"></span>
+                    </div>
+
+                    <div>
+                        🏃 <strong>Fitness:</strong>
+                        <span id="healthResult"></span>
+                    </div>
+
+                </div>
+
+
+                <div class="final-warning">
+
+                    ⚠️ <strong>FINAL VERDICT:</strong>
+
+                    <br>
+
+                    നിങ്ങളുടെ ഭാവി safe ആണ്...
+                    കാരണം ഒന്നും സംഭവിക്കാൻ പോകുന്നില്ല. 😂
+
+                </div>
+
+
+                <button
+                    id="tryAgain"
+                    class="next-button">
+
+                    🔄 TRY AGAIN / ROAST SOMEONE ELSE
+
+                </button>
+
+
+                <p class="footer-text">
+
+                    ⭐ Astrology Department:
+                    Keshavan &amp; Sons Pvt. Ltd.
+                    (No actual astrologers were harmed.)
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
