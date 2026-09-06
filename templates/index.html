@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="ml">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>കേശുവിന്റെ പ്രവചനം - Keshunte Pravajanam | 100% Useless Astrology</title>
-    
+
     <!-- Meta tags for SEO and sharing -->
-    <meta name="description" content="കേശുവിന്റെ പ്രവചനം (Keshunte Pravajanam) - The hilarious Malayalam astrology prediction generator for college useless project competition. 100% unscientific, 0% guarantee!">
+    <meta name="description"
+        content="കേശുവിന്റെ പ്രവചനം (Keshunte Pravajanam) - The hilarious Malayalam astrology prediction generator for college useless project competition. 100% unscientific, 0% guarantee!">
     <meta property="og:title" content="കേശുവിന്റെ പ്രവചനം 🔮 Keshunte Pravajanam">
-    <meta property="og:description" content="കവടി നിരത്തി കമ്പ്യൂട്ടറിൽ നോക്കി പറയുന്ന കേരളത്തിലെ നമ്പർ വൺ അശാസ്ത്രീയ ജാതകം!">
-    
+    <meta property="og:description"
+        content="കവടി നിരത്തി കമ്പ്യൂട്ടറിൽ നോക്കി പറയുന്ന കേരളത്തിലെ നമ്പർ വൺ അശാസ്ത്രീയ ജാതകം!">
+
     <!-- Google Fonts: Malayalam Unicode Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Gayathri:wght@400;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;600;700;900&family=Yatra+One&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chilanka&family=Gayathri:wght@400;700&family=Manjari:wght@400;700&family=Noto+Sans+Malayalam:wght@400;600;700;900&family=Yatra+One&display=swap"
+        rel="stylesheet">
+
     <!-- External stylesheet -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="./static/css/style.css">
 </head>
+
 <body>
 
     <!-- Hanging Lemon & 7 Green Chillies Evil-Eye Talisman (നാരങ്ങ-മുളക് താലിമാല) -->
@@ -45,7 +51,7 @@
 
     <!-- Main Container -->
     <main class="main-wrapper">
-        
+
         <!-- Header Section -->
         <header class="astro-header">
             <div class="competition-badge">
@@ -88,29 +94,22 @@
             </div>
 
             <div class="card-body">
-                
+
                 <p class="welcome-blurb">
-                    നിങ്ങളുടെ പേര് നൽകി ആ ദിവ്യമായ ബട്ടൺ അമർത്തൂ! കേശു സ്വാമി ഇപ്പോൾ തന്നെ കവടി ഉരുട്ടി നിങ്ങളുടെ ഭാവിയിലെ സകല മണ്ടത്തരങ്ങളും തുറന്നുപറയും!
+                    നിങ്ങളുടെ പേര് നൽകി ആ ദിവ്യമായ ബട്ടൺ അമർത്തൂ! കേശു സ്വാമി ഇപ്പോൾ തന്നെ കവടി ഉരുട്ടി നിങ്ങളുടെ
+                    ഭാവിയിലെ സകല മണ്ടത്തരങ്ങളും തുറന്നുപറയും!
                 </p>
 
                 <!-- Prediction Form -->
                 <form id="pravajanamForm" onsubmit="return false;">
-                    
+
                     <!-- Name Input Field -->
                     <div class="form-group">
                         <label for="userName" class="field-label">
                             <span class="label-icon">👤</span> നിങ്ങളുടെ പേര് നൽകുക:
                         </label>
-                        <input 
-                            type="text" 
-                            id="userName" 
-                            name="userName" 
-                            class="styled-input" 
-                            placeholder="ഉദാ: ദാസൻ, വിജയൻ, ദാമു, കനകം..." 
-                            autocomplete="off"
-                            maxlength="40"
-                            required
-                        >
+                        <input type="text" id="userName" name="userName" class="styled-input"
+                            placeholder="ഉദാ: ദാസൻ, വിജയൻ, ദാമു, കനകം..." autocomplete="off" maxlength="40" required>
                         <span class="input-hint">💡 യഥാർത്ഥ പേരോ, അല്ലെങ്കിൽ നിങ്ങളുടെ വിളിപ്പേരോ നൽകാം!</span>
                     </div>
 
@@ -123,16 +122,16 @@
                             <select id="nakshatram" class="styled-select">
                                 <option value="">-- നക്ഷത്രം അറിയില്ല (Mystery) --</option>
                                 {% if rashis %}
-                                    {% for rashi in rashis %}
-                                        <option value="{{ rashi.id }}">{{ rashi.name }}</option>
-                                    {% endfor %}
+                                {% for rashi in rashis %}
+                                <option value="{{ rashi.id }}">{{ rashi.name }}</option>
+                                {% endfor %}
                                 {% else %}
-                                    <option value="ashwathi">അശ്വതി ⭐</option>
-                                    <option value="bharani">ഭരണി ⭐</option>
-                                    <option value="karthika">കാർത്തിക ⭐</option>
-                                    <option value="rohini">രോഹിണി ⭐</option>
-                                    <option value="makayiram">മകയിരം ⭐</option>
-                                    <option value="thiruvonam">തിരുവോണം ⭐</option>
+                                <option value="ashwathi">അശ്വതി ⭐</option>
+                                <option value="bharani">ഭരണി ⭐</option>
+                                <option value="karthika">കാർത്തിക ⭐</option>
+                                <option value="rohini">രോഹിണി ⭐</option>
+                                <option value="makayiram">മകയിരം ⭐</option>
+                                <option value="thiruvonam">തിരുവോണം ⭐</option>
                                 {% endif %}
                             </select>
                         </div>
@@ -180,9 +179,9 @@
 
                 <!-- Prediction Result Section (The Grand Jathakam Slip) -->
                 <div id="resultBox" class="result-box hidden">
-                    
+
                     <div class="jathakam-slip">
-                        
+
                         <!-- Slip Header -->
                         <div class="slip-header">
                             <div class="slip-stamp">APPROVED BY KESHU SWAMI 💮</div>
@@ -218,14 +217,15 @@
 
                         <!-- Dosham & Remedy Grid -->
                         <div class="two-col-grid">
-                            
+
                             <!-- Absurd Dosham -->
                             <div class="info-block dosham-block">
                                 <div class="block-title">
                                     <span>⚠️</span> കണ്ടകശനി &amp; ദോഷം
                                 </div>
                                 <h4 id="resultDoshamName" class="dosham-name">റീൽസ് അഡിക്ഷൻ ദോഷം</h4>
-                                <p id="resultDoshamDesc" class="block-desc">ഫോൺ സ്ക്രീനിൽ നോക്കി നോക്കി നേരം വെളുപ്പിക്കുന്ന അവസ്ഥ.</p>
+                                <p id="resultDoshamDesc" class="block-desc">ഫോൺ സ്ക്രീനിൽ നോക്കി നോക്കി നേരം
+                                    വെളുപ്പിക്കുന്ന അവസ്ഥ.</p>
                             </div>
 
                             <!-- Absurd Remedy -->
@@ -234,7 +234,8 @@
                                     <span>🌿</span> അത്ഭുത പരിഹാരം
                                 </div>
                                 <p id="resultRemedy" class="block-desc">
-                                    ഉടൻ തന്നെ അടുത്തുള്ള ചായക്കടയിൽ പോയി സുഹൃത്തുക്കൾക്ക് പഴംപൊരിയും ചായയും വാങ്ങി നൽകുക.
+                                    ഉടൻ തന്നെ അടുത്തുള്ള ചായക്കടയിൽ പോയി സുഹൃത്തുക്കൾക്ക് പഴംപൊരിയും ചായയും വാങ്ങി
+                                    നൽകുക.
                                 </p>
                             </div>
 
@@ -273,10 +274,12 @@
                             <button id="speakBtn" class="action-btn speak-btn" title="കേശുവിന്റെ ശബ്ദത്തിൽ കേൾക്കൂ">
                                 🗣️ ശബ്ദത്തിൽ കേൾക്കൂ
                             </button>
-                            <button id="shareWhatsappBtn" class="action-btn whatsapp-btn" title="കൂട്ടുകാർക്ക് WhatsApp-ൽ അയക്കുക">
+                            <button id="shareWhatsappBtn" class="action-btn whatsapp-btn"
+                                title="കൂട്ടുകാർക്ക് WhatsApp-ൽ അയക്കുക">
                                 💬 WhatsApp-ൽ ഷെയർ
                             </button>
-                            <button id="printBtn" class="action-btn print-btn" title="ജാതകം പ്രിന്റ് ചെയ്യുക / സേവ് ചെയ്യുക">
+                            <button id="printBtn" class="action-btn print-btn"
+                                title="ജാതകം പ്രിന്റ് ചെയ്യുക / സേവ് ചെയ്യുക">
                                 🖨️ പ്രിന്റ് / സേവ്
                             </button>
                         </div>
@@ -317,4 +320,5 @@
     <!-- JavaScript Application Logic -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>

@@ -5,6 +5,7 @@ A satirical, hilarious Malayalam astrology prediction generator
 for the College Useless Project Competition.
 """
 
+import os
 import random
 from flask import Flask, jsonify, render_template, request
 
@@ -437,8 +438,7 @@ def porutham():
         "text": result["text"]
     })
 
-
-import os
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    port = int(os.environ.get("PORT", 5000))
+    is_debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    app.run(host="0.0.0.0", port=port, debug=is_debug)

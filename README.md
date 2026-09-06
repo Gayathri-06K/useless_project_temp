@@ -8,7 +8,7 @@
 ---
 
 ## 🎯 Basic Details
-### Team Name: Cosmic Katta
+### Team Name: Tea for Two
 ### Project Name: Keshunte Pravajanam (കേശുവിന്റെ പ്രവചനം)
 
 ### Project Description
@@ -58,6 +58,11 @@ Open your browser and navigate to:
 ```
 http://127.0.0.1:5000
 ```
+
+### 5. Deploying to Render
+- **Build Command:** `pip install -r requirements.txt`
+- **Start Command:** `gunicorn app:app` (or `python app.py`)
+- The app automatically binds to `0.0.0.0` and listens to Render's assigned `$PORT`.
 
 ---
 

@@ -7,6 +7,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     // DOM Elements
     const nameInput = document.getElementById("userName");
+    const nakshatramSelect = document.getElementById("nakshatram");
     const favSnackSelect = document.getElementById("favSnack");
     const currentMoodSelect = document.getElementById("currentMood");
     const predictBtn = document.getElementById("predictBtn");
@@ -216,8 +217,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 body: JSON.stringify({
                     name: userName,
-                    favSnack: favSnackSelect.value,
-                    currentMood: currentMoodSelect.value
+                    nakshatram: nakshatramSelect ? nakshatramSelect.value : "",
+                    favSnack: favSnackSelect ? favSnackSelect.value : "",
+                    currentMood: currentMoodSelect ? currentMoodSelect.value : ""
                 })
             });
 
